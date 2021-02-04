@@ -1,0 +1,48 @@
+Word search puzzle strings:
+--------------------------
+
+String 1:
+X A R O F N S Q$X B G K V U O D$Z W H I L E C T
+
+Puzzle 1:
+X A R O F N S Q
+X B G K V U O D
+Z W H I L E C T
+
+Keywords:
+do, for, while
+
+*******************************************************************************
+
+String 2:
+Q N W J F T J O R V O I D G E S S A L C$U U Y K D E N G I S N U X V C R H L B H$E S B J P W T D C U E E T A V I R P L H$E V N L H I N L A D F F I N T C X J A K$S T R I I B R E A K P N V C H K J B S W$A Y L J L C V S D P R O T E C T E D S Z$V L O O B M V Y L T A K Y P S F F Y L Y
+
+Puzzle 2:
+Q N W J F T J O R V O I D G E S S A L C
+U U Y K D E N G I S N U X V C R H L B H
+E S B J P W T D C U E E T A V I R P L H
+E V N L H I N L A D F F I N T C X J A K
+S T R I I B R E A K P N V C H K J B S W
+A Y L J L C V S D P R O T E C T E D S Z
+V L O O B M V Y L T A K Y P S F F Y L Y
+
+Keywords:
+bool, break, class, int, private, protected, unsigned, void
+
+*******************************************************************************
+
+String 3:
+X O Q J Y T M X H T J U C E H I K V C K N U L L P T R T A R P V A B X M H Q O D$H P W P D H C T I W S L Y L H D K V U K S X S G H E L N X H L S X W C N W P A Y$N R U T E R Y Q N L A N V I M C K W I W E P P F A M U A G C I T A T S G I E B M$G O N D L V P Q E S A C V H K J H E U X R D W D N E W Z X P U Z B F Y Q R S R M$E L S E U K Z X P S J A K C Q N A J G H E C A P S E M A N E T E L E D B A Q U Y
+
+Puzzle 3:
+X O Q J Y T M X H T J U C E H I K V C K N U L L P T R T A R P V A B X M H Q O D
+H P W P D H C T I W S L Y L H D K V U K S X S G H E L N X H L S X W C N W P A Y
+N R U T E R Y Q N L A N V I M C K W I W E P P F A M U A G C I T A T S G I E B M
+G O N D L V P Q E S A C V H K J H E U X R D W D N E W Z X P U Z B F Y Q R S R M
+E L S E U K Z X P S J A K C Q N A J G H E C A P S E M A N E T E L E D B A Q U Y
+
+Keywords:
+case, delete, do, else, namespace, new, nullptr, return, static, switch
+
+*******************************************************************************
+
