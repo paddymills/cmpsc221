@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.155.1/containers/java-8
+{
+	"name": "OpenJDK 15",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"java.home": "/usr/local/openjdk-15",
+		"java.configuration.runtimes": [{
+			"default": true,
+			"name": "JavaSE-15",
+			"path": "/usr/local/openjdk-15"
+		}]
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"nhoizey.gremlins",
+		"mhutchie.git-graph",
+		"omoki1207.pdf"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version"
+}
