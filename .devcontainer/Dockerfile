@@ -9,5 +9,7 @@ RUN apt-get update && apt-get install -y \
     git
 
 RUN useradd -ms /bin/bash vscode
+RUN git config --global user.name paddymills
+RUN git config --global user.email paddymills@pm.me
 
 USER vscode
