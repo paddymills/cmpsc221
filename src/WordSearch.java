@@ -13,10 +13,27 @@
                         (https://devdocs.io/openjdk~15/);
 */
 
+import java.util.Scanner;
+
 public class WordSearch {
 
     public static void main(String[] args) {
-        System.out.println("Hello");
+        // create user input object
+        Scanner userInput = new Scanner(System.in);
+
+        System.out.println("Enter word search puzzle");
+        System.out.println("(separate rows with `$`)");
+        System.out.print("\n>> ");
+
+        // read puzzle from input string
+        String puzzle = userInput.nextLine();
+
+        System.out.print("Puzzle :\n\n\t");
+        System.out.println(puzzle.replace("$", "\n\t"));
+        System.out.print("\n");
+        
+        // close user input stream
+        userInput.close();
     }
 
 }
