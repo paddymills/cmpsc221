@@ -17,23 +17,66 @@ import java.util.Scanner;
 
 public class WordSearch {
 
+    private String puzzle;
+    private int row_length;
+    private int rows;
+
     public static void main(String[] args) {
         // create user input object
         Scanner userInput = new Scanner(System.in);
+
+        // create puzzle object
+        WordSearch puzzle = new WordSearch();
 
         System.out.println("Enter word search puzzle");
         System.out.println("(separate rows with `$`)");
         System.out.print("\n>> ");
 
         // read puzzle from input string
-        String puzzle = userInput.nextLine();
+        String input = userInput.nextLine();
+        puzzle.setPuzzle(input);
 
-        System.out.print("Puzzle :\n\n\t");
-        System.out.println(puzzle.replace("$", "\n\t"));
-        System.out.print("\n");
+        boolean solving = true;
+        do {
+            // print puzzle
+            puzzle.printPuzzle();
+
+            // ask user for word to find
+            System.out.print("Please enter a word to search for: ");
+            input = userInput.nextLine();
+
+            // check if word is in puzzle
+            puzzle.findWord(input);
+            
+            // ask to continue solving
+            System.out.print("Search for another word ([Y]es/[N]o)? ");
+            input = userInput.nextLine();
+
+            // if user gave No or N, stop loop
+            if (input.toUpperCase().startsWith("N")) {
+                solving = false;
+            }
+
+        } while (solving);
+        puzzle.printPuzzle();
         
         // close user input stream
         userInput.close();
+    }
+
+    public void setPuzzle(String rawPuzzle) {
+        puzzle = rawPuzzle;
+    }
+
+    public void printPuzzle() {
+        System.out.print("Puzzle :\n\n\t");
+        System.out.println(puzzle.replace("$", "\n\t"));
+        System.out.print("\n");
+    }
+
+    public findWord(String word) {
+        
+
     }
 
 }
