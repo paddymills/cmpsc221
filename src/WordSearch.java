@@ -31,12 +31,8 @@ public class WordSearch {
         System.out.println("(separate rows with `$`)");
         System.out.print("\n>> ");
 
-        // for testing
-        System.out.print("\n");
-        input = "X A R O F N S Q$X B g K V U O D$Z W H I L E C T";
-
         // read puzzle from input string
-        // input = userInput.nextLine();
+        input = userInput.nextLine();
         puzzle.setPuzzle(input);
 
         boolean solving = true;

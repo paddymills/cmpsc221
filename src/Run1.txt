@@ -1,0 +1,58 @@
+----------------------------------
+     ____                _ 
+    |  _ \ _   _ _ __   / |
+    | |_) | | | | '_ \  | |
+    |  _ <| |_| | | | | | |
+    |_| \_\\__,_|_| |_| |_|
+
+----------------------------------
+
+vscode@5394f1f06aa1:/workspaces/code$  /usr/bin/env /usr/local/openjdk-15/bin/java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -Dfile.encoding=UTF-8 -cp /home/vscode/.vscode-server/data/User/workspaceStorage/b07a0d971638501baaf3060637865505/redhat.java/jdt_ws/code_4e4172cf/bin WordSearch 
+Enter word search puzzle
+(separate rows with `$`)
+
+>> X A R O F N S Q$X B G K V U O D$Z W H I L E C T
+
+Puzzle :
+
+        X A R O F N S Q 
+        X B G K V U O D 
+        Z W H I L E C T 
+
+Please enter a word to search for: whIlE
+
+Search word "WHILE" found forward.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        X A R O F N S Q 
+        X B G K V U O D 
+        Z * * * * * C T 
+
+Please enter a word to search for: do
+
+Search word "DO" found backwards.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        X A R O F N S Q 
+        X B G K V U * * 
+        Z * * * * * C T 
+
+Please enter a word to search for: if
+
+Search word "IF" not found.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        X A R O F N S Q 
+        X B G K V U * * 
+        Z * * * * * C T 
+
+Please enter a word to search for: for
+
+Search word "FOR" found backwards.
+Search for another word ([Y]es/[N]o)? n

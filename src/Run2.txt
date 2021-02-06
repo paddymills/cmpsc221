@@ -1,0 +1,90 @@
+----------------------------------
+
+     ____                ____  
+    |  _ \ _   _ _ __   |___ \ 
+    | |_) | | | | '_ \    __) |
+    |  _ <| |_| | | | |  / __/ 
+    |_| \_\\__,_|_| |_| |_____|
+
+----------------------------------
+
+vscode@5394f1f06aa1:/workspaces/code$  /usr/bin/env /usr/local/openjdk-15/bin/java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -Dfile.encoding=UTF-8 -cp /home/vscode/.vscode-server/data/User/workspaceStorage/b07a0d971638501baaf3060637865505/redhat.java/jdt_ws/code_4e4172cf/bin WordSearch 
+Enter word search puzzle
+(separate rows with `$`)
+
+>> Q N W J F T J O R V O I D G E S S A L C$U U Y K D E N G I S N U X V C R H L B H$E S B J P W T D C U E E T A V I R P L H$E V N L H I N L A D F F I N T C X J A K$S T R I I B R E A K P N V C H K J B S W$A Y L J L C V S D P R O T E C T E D S Z$V L O O B M V Y L T A K Y P S F F Y L Y
+
+Puzzle :
+
+        Q N W J F T J O R V O I D G E S S A L C 
+        U U Y K D E N G I S N U X V C R H L B H 
+        E S B J P W T D C U E E T A V I R P L H 
+        E V N L H I N L A D F F I N T C X J A K 
+        S T R I I B R E A K P N V C H K J B S W 
+        A Y L J L C V S D P R O T E C T E D S Z 
+        V L O O B M V Y L T A K Y P S F F Y L Y 
+
+Please enter a word to search for: void
+
+Search word "VOID" found forward.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        Q N W J F T J O R * * * * G E S S A L C 
+        U U Y K D E N G I S N U X V C R H L B H 
+        E S B J P W T D C U E E T A V I R P L H 
+        E V N L H I N L A D F F I N T C X J A K 
+        S T R I I B R E A K P N V C H K J B S W 
+        A Y L J L C V S D P R O T E C T E D S Z 
+        V L O O B M V Y L T A K Y P S F F Y L Y 
+
+Please enter a word to search for: break
+
+Search word "BREAK" found forward.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        Q N W J F T J O R * * * * G E S S A L C 
+        U U Y K D E N G I S N U X V C R H L B H 
+        E S B J P W T D C U E E T A V I R P L H 
+        E V N L H I N L A D F F I N T C X J A K 
+        S T R I I * * * * * P N V C H K J B S W 
+        A Y L J L C V S D P R O T E C T E D S Z 
+        V L O O B M V Y L T A K Y P S F F Y L Y 
+
+Please enter a word to search for: protected
+
+Search word "PROTECTED" found forward.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        Q N W J F T J O R * * * * G E S S A L C 
+        U U Y K D E N G I S N U X V C R H L B H 
+        E S B J P W T D C U E E T A V I R P L H 
+        E V N L H I N L A D F F I N T C X J A K 
+        S T R I I * * * * * P N V C H K J B S W 
+        A Y L J L C V S D * * * * * * * * * S Z 
+        V L O O B M V Y L T A K Y P S F F Y L Y 
+
+Please enter a word to search for: int
+
+Search word "INT" found forward.
+Search for another word ([Y]es/[N]o)? y
+
+Puzzle :
+
+        Q N W J F T J O R * * * * G E S S A L C 
+        U U Y K D E N G I S N U X V C R H L B H 
+        E S B J P W T D C U E E T A V I R P L H 
+        E V N L H I N L A D F F * * * C X J A K 
+        S T R I I * * * * * P N V C H K J B S W 
+        A Y L J L C V S D * * * * * * * * * S Z 
+        V L O O B M V Y L T A K Y P S F F Y L Y 
+
+Please enter a word to search for: unsigned
+
+Search word "UNSIGNED" found backwards.
+Search for another word ([Y]es/[N]o)? n
