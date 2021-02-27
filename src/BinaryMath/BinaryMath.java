@@ -8,8 +8,19 @@ package BinaryMath;
 public class BinaryMath {
     
     public static final int NUMBER_OF_PROBLEMS = 15;
+    public ProblemAndAnswer[] problems;
+
     public static void main(String[] args) {
-        ProblemAndAnswer[] problems = new ProblemAndAnswer[NUMBER_OF_PROBLEMS];
+        BinaryMath mathLab = new BinaryMath();
+        
+    }
+
+    public BinaryMath() {
+        problems = new ProblemAndAnswer[NUMBER_OF_PROBLEMS];
+        generateProblems();
+    }
+    
+    public void generateProblems() {
         char[] operators = {'+', '+', '+', '+', '+', '-', '-', '-', '-', '-', '*', '*', '*', '*', '*'};
         
         for (int i = 0; i < NUMBER_OF_PROBLEMS; i++) {
@@ -27,13 +38,12 @@ public class BinaryMath {
                 // else: problem not found
                 break;
             }
-
+            
         }
         
         for (ProblemAndAnswer prob : problems) {
             System.out.println(prob.getProblem());
         }
-        
     }
 
 }

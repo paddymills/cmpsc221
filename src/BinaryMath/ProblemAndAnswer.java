@@ -2,7 +2,6 @@ package BinaryMath;
 
 import java.util.Random;
 
-
 /**
  * ProblemAndAnswer
  */
@@ -10,27 +9,20 @@ public class ProblemAndAnswer {
     
     private static final int NUMBER_LENGTH = 5;
 
-    private int[] num1;
-    private int[] num2;
+    private BinaryNumber num1;
+    private BinaryNumber num2;
     private char operator;
 
 
     public ProblemAndAnswer(char op) {
 
         // initialize binary number arrays
-        num1 = new int[NUMBER_LENGTH];
-        num2 = new int[NUMBER_LENGTH];
+        num1 = new BinaryNumber(NUMBER_LENGTH);
+        num2 = new BinaryNumber(NUMBER_LENGTH);
 
         // set operator
         operator = op;
 
-        // initialize random number generator
-        Random randomNumber = new Random();
-        
-        for (int i=0; i<NUMBER_LENGTH; i++) {
-            num1[i] = randomNumber.nextInt(1000) % 2;
-            num2[i] = randomNumber.nextInt(1000) % 2;
-        }
     }
 
     public ProblemAndAnswer() {
@@ -59,15 +51,23 @@ public class ProblemAndAnswer {
     }
 
     public String getProblem() {
-        String num1String = new String();
-        String num2String = new String();
+        String problem = new String();
 
-        for (int i = 0; i < NUMBER_LENGTH; i++) {
-            num1String += num1[i];
-            num2String += num2[i];
-        }
+        /*
+            get problem display format
+            example:
+                   11011
+                 + 10100
+                ---------
+        */
+        problem += "   " + num1.toString() + "\n";
+        problem += " " + operator + " " + num2.toString() + "\n";
+        problem += "----";
+        for (int i = 0; i < NUMBER_LENGTH; i++)
+            problem += "-";
 
-        return num1String + " " + operator + " " + num2String;
+        return problem;
+    
     }
 
     public boolean equals(ProblemAndAnswer other) {
