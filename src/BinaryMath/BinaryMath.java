@@ -117,7 +117,7 @@ public class BinaryMath {
 
     public String displayProblem(ProblemAndAnswer problem) {
 
-        return JOptionPane.showInputDialog(null, problem.getProblem(), "Solve this...", JOptionPane.PLAIN_MESSAGE);
+        return JOptionPane.showInputDialog(null, problem.getProblem(), "Solve this...", JOptionPane.QUESTION_MESSAGE);
 
     }
 
