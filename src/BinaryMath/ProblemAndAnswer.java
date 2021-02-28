@@ -1,58 +1,59 @@
 package BinaryMath;
 
-import java.util.Random;
-
 /**
  * ProblemAndAnswer
  */
 public class ProblemAndAnswer {
-    
-    private static final int NUMBER_LENGTH = 5;
 
-    private BinaryNumber num1;
-    private BinaryNumber num2;
-    private char operator;
+    private String problem;
+    private String answer;
 
 
-    public ProblemAndAnswer(char op) {
+    public ProblemAndAnswer() {
 
         // initialize binary number arrays
-        num1 = new BinaryNumber(NUMBER_LENGTH);
-        num2 = new BinaryNumber(NUMBER_LENGTH);
-
-        // set operator
-        operator = op;
+        problem = "";
+        answer = "";
 
     }
 
-    public ProblemAndAnswer() {
-        // call the base constructor
-        // operator will be invalid but we will fix that later
-        // has to be the first line, apparenlty
-        this('_');
+    public void setProblem(String p) {
+        problem = p;
+    }
 
-        Random randomOp = new Random();
-
-        switch (randomOp.nextInt(3)) {
-            case 0:
-                operator = '+';
-                break;
-            case 1:
-                operator = '-';
-                break;
-            case 2:
-                operator = '*';
-                break;
-            default:
-                operator = '/';
-                break;
-        }
-
+    public void setAnswer(String a) {
+        answer = a;
     }
 
     public String getProblem() {
-        String problem = new String();
+        return problem;
+    }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public boolean checkAnswer(String userAnswer) {
+        if (answer == userAnswer)
+            return true;
+
+        return false;
+    }
+
+    public boolean equals(ProblemAndAnswer other) {
+        if (problem.equals(other.getProblem()))
+            return true;
+
+        return false;
+    }
+
+    public static String getProblemFormat(BinaryNumber num1, BinaryNumber num2, char operator) {
+        return getProblemFormat(num1.toString(), num2.toString(), operator);
+    }
+
+    public static String getProblemFormat(String num1, String num2, char operator) {
+        String problem;
+        
         /*
             get problem display format
             example:
@@ -60,48 +61,34 @@ public class ProblemAndAnswer {
                  + 10100
                 ---------
         */
-        problem += "   " + num1.toString() + "\n";
-        problem += " " + operator + " " + num2.toString() + "\n";
+
+        problem =  "   " + num1 + "\n";
+        problem += " " + operator + " " + num2 + "\n";
         problem += "----";
-        for (int i = 0; i < NUMBER_LENGTH; i++)
+        for (int j = 0; j < num1.length(); j++)
             problem += "-";
 
         return problem;
-    
     }
 
-    public boolean equals(ProblemAndAnswer other) {
-        if (getProblem().equals(other.getProblem()))
-            return true;
-
-        return false;
-    }
-
-    public boolean checkAnswer(String answer) {
-        if (solveProblem().equals(answer))
-            return true;
-        
-        return false;
-    }
-
-    private String solveProblem() {
-        String answer = new String();
+    public static String solveProblem(BinaryNumber num1, BinaryNumber num2, char operator) {
 
         switch (operator) {
             case '+':       // addition
+                return num1.add(num2).toString();
                 
-                break;
             case '-':     // subtraction
-                
-                break;
+                return num1.subtract(num2).toString();    
+
             case '*':     // multiplication
-                
-                break;
+                return num1.multiply(num2).toString();
+
             default:      // division
                 // not required for the assignment
-                break;
+
+                // UNREACHABLE: compiler will fail without
+                return "";
         }
 
-        return answer;
     }
 }

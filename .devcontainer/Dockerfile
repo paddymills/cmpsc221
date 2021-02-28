@@ -5,7 +5,8 @@ FROM openjdk:slim-buster
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y \
-    vim \
+    libfreetype6-dev    \
+    vim                 \
     git
 
 RUN useradd -ms /bin/bash vscode
