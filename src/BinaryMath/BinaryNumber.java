@@ -78,7 +78,7 @@ public class BinaryNumber {
     }
 
     public BinaryNumber add(BinaryNumber other) {
-        int[] result = new int[number.length];
+        int[] result = new int[number.length + 1];
         int carry = 0;
         int sum;
 
@@ -159,7 +159,7 @@ public class BinaryNumber {
     }
 
     public BinaryNumber multiply(BinaryNumber other) {
-        int[] result = new int[number.length];
+        int[] result = new int[number.length * 2];
 
         return new BinaryNumber(result);
     }
