@@ -3,6 +3,8 @@ package BinaryMath;
 import java.util.Arrays;
 import java.util.Random;
 
+import java.lang.Math;
+
 public class BinaryNumber {
     
     private static final int RANDOM_NUMBER_RANGE = 1000;
@@ -59,6 +61,10 @@ public class BinaryNumber {
         return number[index];
     }
 
+    public void setDigit(int index, int value) {
+        number[index] = value;
+    }
+
     public boolean greaterThan(BinaryNumber other) {
         // equal to -> false
         if (this.equals(other))
@@ -67,8 +73,25 @@ public class BinaryNumber {
         // iterate from highest order digit to lowest order digit
         //  if at any point other's digit is greater than this's digit,
         //  other is greater
-        for (int i = number.length; i > 0; i--) {
-            if (number[i-1] < other.digitAt(i-1))
+        int maxLength = Math.max(number.length, other.getLength());
+        for (int i = maxLength; i > 0; i--) {
+            // mismatched lengths
+            if (i >= number.length) {
+                // other is longer and has a 1 (not zero padded)
+                if (other.digitAt(i) > 0)
+                    return false;
+
+                // else -> next iteration
+            } 
+            else if (i >= other.getLength()) {
+                // this is longer and has a 1 (not zero padded)
+                if (number[i] > 0)
+                    return true;
+
+                // else -> next iteration
+            }
+
+            else if (number[i-1] < other.digitAt(i-1))
                 // this < other;
                 return false;
         }
@@ -78,11 +101,22 @@ public class BinaryNumber {
     }
 
     public BinaryNumber add(BinaryNumber other) {
+        // mismatch lengths -> add must be called from longer number
+        if (number.length < other.getLength())
+            return other.add(this);
+
+
         int[] result = new int[number.length + 1];
         int carry = 0;
         int sum;
 
         for (int i=0; i<number.length; i++) {
+
+            // mismatched number lengths -> other has no more digits
+            if (i >= other.getLength()) {
+                result[i] = number[i];
+            }
+
             sum = number[i] + other.digitAt(i) + carry;
 
             /* 
@@ -159,9 +193,27 @@ public class BinaryNumber {
     }
 
     public BinaryNumber multiply(BinaryNumber other) {
-        int[] result = new int[number.length * 2];
+        BinaryNumber result = new BinaryNumber(number.length * 2);
+        BinaryNumber product = new BinaryNumber(number.length * 2);
 
-        return new BinaryNumber(result);
+        for (int i = 0; i < other.getLength(); i++) {
+            if (other.digitAt(i) == 0)
+                continue;
+
+            // add preceding zeros
+            for (int j = 0; j < i; j++)
+                product.setDigit(j, 0);
+
+            // add number to product
+            for (int j = 0; j < number.length; j++) {
+                product.setDigit(i+j, number[i]);
+            }
+
+            // add row to result
+            result = result.add(product);
+        }
+
+        return result;
     }
 
 }
