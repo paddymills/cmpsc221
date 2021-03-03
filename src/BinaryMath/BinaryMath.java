@@ -1,5 +1,18 @@
 package BinaryMath;
 
+/**
+    Author:             Patrick Miller
+    E-mail:             pjm6196@psu.edu
+    Course:             CMPSC 221
+    Assignment:         Project 2
+    Due date:           3/4/2021
+    File:               BinaryMath.java
+    Purpose:            Binary math program to demostrate classes
+    Compiler/IDE:       openjdk-15/VisualStudioCode
+    Operating system:   Linux pop-os 5.8.0
+    Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+*/
+
 import javax.swing.JOptionPane;
 
 /**
@@ -23,10 +36,12 @@ public class BinaryMath {
         mathLab.programLoop();
 
         // closing message
-
         JOptionPane.showMessageDialog(null, "Thank you for playing Binary Math", "Goodbye", JOptionPane.PLAIN_MESSAGE);
     }
 
+    /**
+     * Constructor
+     */
     public BinaryMath() {
         // initialize problem array
         problems = new ProblemAndAnswer[NUMBER_OF_PROBLEMS];
@@ -36,11 +51,15 @@ public class BinaryMath {
         generateProblems();
     }
     
+    /**
+     * method to generate problems
+     */
     public void generateProblems() {
         BinaryNumber num1;
         BinaryNumber num2;
         String problemString;
 
+        // five of each: addition, subtraction, multiplication
         char[] operators = {'+', '+', '+', '+', '+', '-', '-', '-', '-', '-', '*', '*', '*', '*', '*'};
         
         for (int i = 0; i < NUMBER_OF_PROBLEMS; i++) {
@@ -74,6 +93,13 @@ public class BinaryMath {
         
     }
 
+    /**
+     * main program loop
+     * -----------------------
+     * iterates through each problem
+     * 
+     * quits either by user request or when problem list is exhausted
+     */
     public void programLoop() {
         int keepGoing;
 
@@ -88,6 +114,13 @@ public class BinaryMath {
         }
     }
     
+    /**
+     * problem loop
+     * -----------------------
+     * displays the problem and asks for the answer for the user
+     * 
+     * quits either by a correct answer or user clicks cancel
+     */
     public void problemLoop(ProblemAndAnswer problem) {
         String userInput;
         boolean quit = false;
@@ -115,12 +148,25 @@ public class BinaryMath {
         } while (!quit);
     }
 
+    /**
+     * displays problem as input dialog
+     * 
+     * @return user's input: either text as a String or null if cancel was clicked
+     */
     public String displayProblem(ProblemAndAnswer problem) {
 
         return JOptionPane.showInputDialog(null, problem.getProblem(), "Solve this...", JOptionPane.QUESTION_MESSAGE);
 
     }
 
+    /**
+     * input validator
+     * iterates through user's input and validates that each character
+     * is a 1 or a 0
+     * 
+     * @param input user's input as a String
+     * @return false if any character other than 1 or 0 is encountered. else, true.
+     */
     public boolean validateInput(String input) {
         
         // assert number is binary
