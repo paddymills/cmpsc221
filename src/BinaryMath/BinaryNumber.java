@@ -11,6 +11,7 @@ package BinaryMath;
     Compiler/IDE:       openjdk-15/VisualStudioCode
     Operating system:   Linux pop-os 5.8.0
     Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+                        BinaryMath (http://www.binarymath.info/)
 */
 
 import java.util.Arrays;
@@ -45,10 +46,24 @@ public class BinaryNumber {
 
     /**
      * int[] wrapper constructor
+     * this wrapper has the added bonus that it will truncate the number to the last 1
+     * 
      * @param num binary number in integer array form to wrap as a BinaryNumber
      */
     public BinaryNumber(int[] num) {
-        number = num;
+        int last1 = 0;
+
+        // find last 1 digit
+        for (int i = 0; i < num.length; i++) {
+            if (num[i] == 1)
+                last1 = i;
+        }
+
+        // all zeros -> don't truncate
+        if (last1 == 0)
+            last1 = num.length - 1;
+        
+        number = Arrays.copyOf(num, last1 + 1);
     }
 
     /**
@@ -88,7 +103,34 @@ public class BinaryNumber {
      * @return true or false, depending on equality
      */
     public boolean equals(BinaryNumber other) {
-        return this.toString().equals(other.toString());
+        // find last digit that is a 1 (ignore zero padding)
+        int numberEnd = 0, otherEnd = 0;
+        // last 1 digit in this number
+        for (int i = 0; i < number.length; i++) {
+            if (number[i] == 1) {
+                numberEnd = i;
+            }
+        }
+
+        // get last 1 digit in other number
+        for (int i = 0; i < other.getLength(); i++) {
+            if (other.getDigit(i) == 1) {
+                otherEnd = i;
+            }
+        }
+
+        // if last 1 indexes don't match
+        if (numberEnd != otherEnd)
+            return false;
+
+        // check each digit against the other
+        for (int i = 0; i <= numberEnd; i++) {
+            // digits mismatch
+            if (number[i] != other.getDigit(i))
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -104,9 +146,12 @@ public class BinaryNumber {
      * indexing wrapper method for accessing number digits at an index
      * 
      * @param index index to return digit of
-     * @return digit at requested index
+     * @return digit at requested index, 0 if digit is past bounds
      */
     public int getDigit(int index) {
+        if (index >= number.length)
+            return 0;
+
         return number[index];
     }
 
@@ -128,37 +173,24 @@ public class BinaryNumber {
      * @return  true or false, depending on this >= other
      */
     public boolean greaterThan(BinaryNumber other) {
-        // equal to -> false
-        if (this.equals(other))
-            return false;
+        int thisNum, otherNum;
 
         // iterate from highest order digit to lowest order digit
         //  if at any point other's digit is greater than this's digit,
         //  other is greater
-        int maxLength = Math.max(number.length, other.getLength());
-        for (int i = maxLength; i > 0; i--) {
-            // mismatched lengths
-            if (i >= number.length) {
-                // other is longer and has a 1 (not zero padded)
-                if (other.getDigit(i) > 0)
-                    return false;
+        int maxIndex = Math.max(number.length, other.getLength()) - 1;
+        for (int i = maxIndex; i >= 0; i--) {
+            thisNum = this.getDigit(i);
+            otherNum = other.getDigit(i);
 
-                // else -> next iteration
-            } 
-            else if (i >= other.getLength()) {
-                // this is longer and has a 1 (not zero padded)
-                if (number[i] > 0)
-                    return true;
+            if (thisNum > otherNum)
+                return true;
 
-                // else -> next iteration
-            }
-
-            else if (number[i-1] < other.getDigit(i-1))
-                // this < other;
+            if (thisNum < otherNum)
                 return false;
         }
 
-        // this >= other;
+        // this == other;
         return true;
     }
 
@@ -178,14 +210,10 @@ public class BinaryNumber {
         int carry = 0;
         int sum;
 
-        for (int i=0; i<number.length; i++) {
+        int maxLength = Math.max(number.length, other.getLength());
+        for (int i=0; i<maxLength; i++) {
 
-            // mismatched number lengths -> other has no more digits
-            if (i >= other.getLength()) {
-                result[i] = number[i];
-            }
-
-            sum = number[i] + other.getDigit(i) + carry;
+            sum = this.getDigit(i) + other.getDigit(i) + carry;
 
             /* 
                 *************************
@@ -208,6 +236,10 @@ public class BinaryNumber {
             }
         }
 
+        // if number is being carried from last digit addion, add to end
+        if (carry == 1)
+            result[number.length] = 1;
+
         return new BinaryNumber(result);
     }
 
@@ -220,10 +252,6 @@ public class BinaryNumber {
      * @return  new BinaryNumber, the difference of this and other
      */
     public BinaryNumber subtract(BinaryNumber other) {
-
-        // make sure top number is greater than bottom number
-        if (other.greaterThan(this))
-            return other.subtract(this);
         
         int[] result = new int[number.length];
 
@@ -232,36 +260,38 @@ public class BinaryNumber {
         int[] num = Arrays.copyOf(number, number.length);
 
         for (int i=0; i<num.length; i++) {
-            //   0      1      1
-            // - 0 OR - 0 OR - 1
-            // ---    ---    ---
-            //   0      1      0
-            if (num[i] - other.getDigit(i) > 0)
-                result[i] = num[i];
+            /*
+             * 0-0=0
+             * 1-1=0
+             * 1-0=1
+            */
+            if ((num[i] - other.getDigit(i)) >= 0)
+                result[i] = num[i] - other.getDigit(i);
 
-            //   0
-            // - 1
-            // ---
-            //   ?
+            // 0-1=?
             else {
                 // any time you carry a number,
                 // you are basically doing 2-1=1
                 result[i] = 1;
 
                 // find next 1 digit
-                for (int j = i + 1; j < num.length; j++) {
+                int j = i + 1;
+                while (j < num.length) {
                     if (num[j] == 1) {
                         num[j] = 0;
-                        break;
+                        j = num.length; // terminates loop
                     }
 
                     // 0 encountered
                     //  will require moving to the next digit
                     //  would require recursive subtraction
                     //  but we can shorten this to make it equal to 1
-                    num[j] = 1;
+                    else {
+                        num[j] = 1;
+                    }
+
+                    j++;
                 }
-                
             }
         }
 
@@ -275,20 +305,19 @@ public class BinaryNumber {
      * @return  new BinaryNumber, the product of this and other
      */
     public BinaryNumber multiply(BinaryNumber other) {
-        BinaryNumber result = new BinaryNumber(number.length * 2);
-        BinaryNumber product = new BinaryNumber(number.length * 2);
+        BinaryNumber result = new BinaryNumber(new int[number.length * 2]);
+        BinaryNumber product;
 
         for (int i = 0; i < other.getLength(); i++) {
             if (other.getDigit(i) == 0)
                 continue;
 
-            // add preceding zeros
-            for (int j = 0; j < i; j++)
-                product.setDigit(j, 0);
+            // reset product
+            product = new BinaryNumber(new int[number.length * 2]);
 
             // add number to product
             for (int j = 0; j < number.length; j++) {
-                product.setDigit(i+j, number[i]);
+                product.setDigit(i+j, number[j]);
             }
 
             // add row to result

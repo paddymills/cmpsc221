@@ -11,6 +11,7 @@ package BinaryMath;
     Compiler/IDE:       openjdk-15/VisualStudioCode
     Operating system:   Linux pop-os 5.8.0
     Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+                        BinaryMath (http://www.binarymath.info/)
 */
 
 import javax.swing.JOptionPane;
@@ -29,6 +30,9 @@ public class BinaryMath {
 
     public static void main(String[] args) {
         BinaryMath mathLab = new BinaryMath();
+        for (ProblemAndAnswer p : mathLab.problems) {
+            System.out.println(p.getProblem() + " :: " + p.getAnswer());
+        }
 
         // welcome message
         JOptionPane.showMessageDialog(null, "Welcome to Binary Math, where there are 10 kinds of people. Those who understand binary, and those who don't.", "Welcome", JOptionPane.PLAIN_MESSAGE);
@@ -59,33 +63,43 @@ public class BinaryMath {
         BinaryNumber num2;
         String problemString;
 
+        boolean rerun = true;  // for controlling while loop
+
         // five of each: addition, subtraction, multiplication
         char[] operators = {'+', '+', '+', '+', '+', '-', '-', '-', '-', '-', '*', '*', '*', '*', '*'};
         
         for (int i = 0; i < NUMBER_OF_PROBLEMS; i++) {
             problems[i] = new ProblemAndAnswer();
             
-            while (true) {
+            do {
+                rerun = false;
+
+                // generate numbers
                 num1 = new BinaryNumber(NUMBER_LENGTH);
                 num2 = new BinaryNumber(NUMBER_LENGTH);
 
-                // get problem as string
-                problemString = ProblemAndAnswer.getProblemFormat(num1, num2, operators[i]);
-
-                // set problem
-                problems[i].setProblem(problemString);
-                
-                // ensure problem is not already in list
-                for (int j = 0; j < i; j++) {
-                    if (problems[j].equals(problems[i])) {
-                        // problem found in problems list: regenerate
-                        continue;
+                // subtraction: top number must be greater
+                if (operators[i] == '-') {
+                    while (num2.greaterThan(num1)) {
+                        // could swap numbers, but its easier/cleaner to regenerate
+                        num1 = new BinaryNumber(NUMBER_LENGTH);
                     }
                 }
                 
-                // else: problem not found
-                break;
-            }
+                // get problem as string
+                problemString = ProblemAndAnswer.getProblemFormat(num1, num2, operators[i]);
+                
+                // ensure problem is not already in list
+                for (int j = 0; j < i; j++) {
+                    if (problems[j].getProblem().equals(problemString)) {
+                        // problem found in problems list: regenerate
+                        rerun = true;   // will rerun generate loop
+                    }
+                }
+            } while (rerun);
+
+            // set problem
+            problems[i].setProblem(problemString);
 
             // calculate and save answer
             problems[i].setAnswer(ProblemAndAnswer.solveProblem(num1, num2, operators[i]));
@@ -135,7 +149,7 @@ public class BinaryMath {
             userInput = userInput.trim();
 
             if (validateInput(userInput)) {
-                if (problem.getAnswer().equals(userInput)) {
+                if (problem.checkAnswer(userInput)) {
                     JOptionPane.showMessageDialog(null, "Good Job! Correct answer!", "Correct", JOptionPane.PLAIN_MESSAGE);
 
                     quit = true;
@@ -154,7 +168,7 @@ public class BinaryMath {
      * @return user's input: either text as a String or null if cancel was clicked
      */
     public String displayProblem(ProblemAndAnswer problem) {
-
+        
         return JOptionPane.showInputDialog(null, problem.getProblem(), "Solve this...", JOptionPane.QUESTION_MESSAGE);
 
     }

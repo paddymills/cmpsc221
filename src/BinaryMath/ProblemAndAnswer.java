@@ -11,6 +11,7 @@ package BinaryMath;
     Compiler/IDE:       openjdk-15/VisualStudioCode
     Operating system:   Linux pop-os 5.8.0
     Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+                        BinaryMath (http://www.binarymath.info/)
 */
 
 
@@ -79,7 +80,8 @@ public class ProblemAndAnswer {
      * @return true or false, if user's answer matches problem's answer
      */
     public boolean checkAnswer(String userAnswer) {
-        if (answer == userAnswer)
+        // ignore leading zeros
+        if (Integer.parseInt(answer) == Integer.parseInt(userAnswer))
             return true;
 
         return false;
@@ -121,23 +123,13 @@ public class ProblemAndAnswer {
      * @return formatted problem string
      */
     public static String getProblemFormat(String num1, String num2, char operator) {
-        String problem;
-        
+
         /*
             get problem display format
             example:
-                   11011
-                 + 10100
-                ---------
+                11011 + 10100 + ?
         */
-
-        problem =  "   " + num1 + "\n";
-        problem += " " + operator + " " + num2 + "\n";
-        problem += "----";
-        for (int j = 0; j < num1.length(); j++)
-            problem += "-";
-
-        return problem;
+        return String.format("%s %s %s = ?", num1, operator, num2);
     }
 
     /**
