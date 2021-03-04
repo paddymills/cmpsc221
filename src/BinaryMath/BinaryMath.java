@@ -30,9 +30,6 @@ public class BinaryMath {
 
     public static void main(String[] args) {
         BinaryMath mathLab = new BinaryMath();
-        for (ProblemAndAnswer p : mathLab.problems) {
-            System.out.println(p.getProblem() + " :: " + p.getAnswer());
-        }
 
         // welcome message
         JOptionPane.showMessageDialog(null, "Welcome to Binary Math, where there are 10 kinds of people. Those who understand binary, and those who don't.", "Welcome", JOptionPane.PLAIN_MESSAGE);
