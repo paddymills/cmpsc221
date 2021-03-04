@@ -63,10 +63,12 @@ public class BinaryMath {
         boolean rerun = true;  // for controlling while loop
 
         // five of each: addition, subtraction, multiplication
-        char[] operators = {'+', '+', '+', '+', '+', '-', '-', '-', '-', '-', '*', '*', '*', '*', '*'};
+        char[] operators = {'+', '-', '*'};
+        char operator;
         
         for (int i = 0; i < NUMBER_OF_PROBLEMS; i++) {
             problems[i] = new ProblemAndAnswer();
+            operator = operators[i % 3];
             
             do {
                 rerun = false;
@@ -76,7 +78,7 @@ public class BinaryMath {
                 num2 = new BinaryNumber(NUMBER_LENGTH);
 
                 // subtraction: top number must be greater
-                if (operators[i] == '-') {
+                if (operator == '-') {
                     while (num2.greaterThan(num1)) {
                         // could swap numbers, but its easier/cleaner to regenerate
                         num1 = new BinaryNumber(NUMBER_LENGTH);
@@ -84,7 +86,7 @@ public class BinaryMath {
                 }
                 
                 // get problem as string
-                problemString = ProblemAndAnswer.getProblemFormat(num1, num2, operators[i]);
+                problemString = ProblemAndAnswer.getProblemFormat(num1, num2, operator);
                 
                 // ensure problem is not already in list
                 for (int j = 0; j < i; j++) {
@@ -99,7 +101,7 @@ public class BinaryMath {
             problems[i].setProblem(problemString);
 
             // calculate and save answer
-            problems[i].setAnswer(ProblemAndAnswer.solveProblem(num1, num2, operators[i]));
+            problems[i].setAnswer(ProblemAndAnswer.solveProblem(num1, num2, operator));
         }
         
     }
