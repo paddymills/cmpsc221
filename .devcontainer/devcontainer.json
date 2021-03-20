@@ -22,7 +22,8 @@
 		"vscjava.vscode-java-pack",
 		"nhoizey.gremlins",
 		"mhutchie.git-graph",
-		"tomoki1207.pdf"
+		"tomoki1207.pdf",
+		"tabnine.tabnine-vscode"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
