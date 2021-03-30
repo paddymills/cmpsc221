@@ -5,7 +5,7 @@ package FavoritesBar;
     E-mail:             pjm6196@psu.edu
     Course:             CMPSC 221
     Assignment:         Project 3
-    Due date:           3/31/2021
+    Due date:           3/30/2021
     File:               WebSiteCollection.java
     Purpose:            A collection of WebSite instances
     Compiler/IDE:       openjdk-15/VisualStudioCode
@@ -50,6 +50,21 @@ public class WebSiteCollection {
         }
 
         return topics;
+    }
+
+    /**
+     * returns the WebSites in a new ArrayList
+     * 
+     * @return websites as new ArrayList
+     */
+    public ArrayList<WebSite> getSites() {
+        ArrayList<WebSite> returnSites = new ArrayList<WebSite>();
+
+        for (WebSite site : sites) {
+            returnSites.add(site);
+        }
+
+        return returnSites;
     }
 
     /**

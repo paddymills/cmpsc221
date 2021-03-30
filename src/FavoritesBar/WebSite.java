@@ -6,7 +6,7 @@ package FavoritesBar;
     E-mail:             pjm6196@psu.edu
     Course:             CMPSC 221
     Assignment:         Project 3
-    Due date:           3/31/2021
+    Due date:           3/30/2021
     File:               WebSite.java
     Purpose:            WebSite instance class
     Compiler/IDE:       openjdk-15/VisualStudioCode
@@ -42,6 +42,14 @@ public class WebSite {
      * @param dateLastVisited
      */
     public WebSite(String siteName, String siteUrl, int siteRating, String siteTopic, String lastVisited) {
+        setName(siteName);
+        setUrl(siteUrl);
+        setRating(siteRating);
+        setTopic(siteTopic);
+        setDate(lastVisited);
+    }
+
+    public WebSite(String siteName, String siteUrl, String siteRating, String siteTopic, String lastVisited) {
         setName(siteName);
         setUrl(siteUrl);
         setRating(siteRating);
@@ -176,15 +184,22 @@ public class WebSite {
     public String toString() {
         String stringRepr = new String();
 
-        stringRepr += "---------------\n";
-        stringRepr += getName() + "\n";
-        stringRepr += getUrl() + "\n";
-        stringRepr += getRating() + "\n";
-        stringRepr += getTopic() + "\n";
-        stringRepr += getDate() + "\n";
-        stringRepr += "---------------";
+        stringRepr += "Name:\t\t" + getName() + "\n";
+        stringRepr += "Address:\t\t" + getUrl() + "\n";
+        stringRepr += "Topic:\t\t" + getTopic() + "\n";
+        stringRepr += "Rating:\t\t" + getRating() + "\n";
+        stringRepr += "Last Visited:\t\t" + getDate();
         
         return stringRepr;
+    }
+
+    /**
+     * gets the object's representation (name and URL)
+     * 
+     * @return the website representation as a string in one line
+     */
+    public String toOneLineString() {
+        return getName() + " (" + getUrl() + ")";
     }
     
 }
