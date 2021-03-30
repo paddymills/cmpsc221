@@ -14,17 +14,20 @@ package FavoritesBar;
 */
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
 public class FavoritesBar {
 
-    private static final String UI_SEPARATOR = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private static final String UI_SEPARATOR = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
     private WebSiteCollection availableSites;
     private WebSiteCollection favorites;
+    private Scanner kbd;
 
     /**
      * FavoritesBar constructor
@@ -35,6 +38,9 @@ public class FavoritesBar {
     public FavoritesBar() {
         favorites = null;
         availableSites = getAvailableSites();
+
+        // initialize input stream
+        kbd = new Scanner(System.in);
     }
 
     /**
@@ -50,86 +56,66 @@ public class FavoritesBar {
      * deletes favorites collection
      */
     private void deleteFavoritesBar() {
+        if ( favorites == null ) {
+            System.out.println("No favorites bar to delete");
+            return;
+        }
+
         favorites = null;
 
         System.out.println("Favorites bar deleted");
     }
 
     /**
-     * adds website to favorites collection
-     * 
-     * @param ws Website to add to favorites collection
-     */
-    private void addWebSite(WebSite ws) {
-        if (favorites == null) {
-            System.out.println("No favorites bar has been created to add to.");
-            return;
-        }
-
-        favorites.addWebSite(ws);
-    }
-
-    /**
-     * remove website from favorites collection
-     * 
-     * @param ws Website to remove from favorites collection
-     */
-    private void removeWebSite(WebSite ws) {
-        if (favorites == null) {
-            System.out.println("No favorites bar has been created to remove from.");
-            return;
-        }
-
-        favorites.removeWebSite(ws);
-    }
-
-    /**
      * main menu loop
      */
     public void mainLoop() {
-        Scanner kbd = new Scanner(System.in);
-        boolean quit = false;
+        int index;
 
-        do {
+        while ( true ) {
             // print main menu
             System.out.println("\nChoose an option:");
             System.out.println("  1) Create favorites bar");
             System.out.println("  2) Delete favorites bar");
             System.out.println("  3) Add website to favorites bar");
             System.out.println("  4) Remove website to favorites bar");
-            System.out.println("  5) Quit\n");
-            System.out.print("  >> ");
+            System.out.println("  5) View favorites bar");
+            System.out.println("  6) Quit\n");
 
-            switch (kbd.nextLine().strip()) {
-                case "1":
+            index = getIntInputLoop(6);
+
+            switch ( index ) {
+                case 1:
                     createFavoritesBar();
                     break;
 
-                case "2":
+                case 2:
                     deleteFavoritesBar();
                     break;
 
-                case "3":
+                case 3:
                     addWebSiteLoop();
                     break;
 
-                case "4":
+                case 4:
                     removeWebSiteLoop();
                     break;
-                    
-                case "5":
-                    quit = true;
+                
+                case 5:
+                    printMenuList( favorites.getSites() );
                     break;
                 
-                default:
+                case 6:
+                    doOutputFile();
+                    return;
+                
+                default:    // unreachable
                     System.out.println("Invalid selection.");
             }
 
             System.out.println(UI_SEPARATOR);
             
-        } while ( !quit );
-
-        kbd.close();
+        }
     }
 
     /**
@@ -144,12 +130,12 @@ public class FavoritesBar {
         printMenuList("Choose a topic:", topics);
 
         // get selected index
-        index = getIntInputLoop(topics.size());
+        index = getIntInputLoop( topics.size() + 1  ) - 1;
 
         if ( index == topics.size() )
             return "";
         
-        return topics.get(index - 1);
+        return topics.get( index );
     }
 
     /**
@@ -161,11 +147,17 @@ public class FavoritesBar {
         WebSite selectedWebSite;
         int index;
 
+        // return if favorites not initialized
+        if (favorites == null) {
+            System.out.println("No favorites bar has been created to remove from.");
+            return;
+        }
+
         // get topic
         String topic = chooseTopicLoop();
 
         // empty string -> return to main menu
-        if ( topic == "" )
+        if ( topic.equals("") )
             return;
 
         sites = availableSites.getSitesWithTopic(topic);
@@ -174,11 +166,12 @@ public class FavoritesBar {
         printMenuList(sites);
         
         // get selected index
-        index = getIntInputLoop(sites.size());
+        index = getIntInputLoop( sites.size() + 1  ) - 1;
 
         if ( index < sites.size() ) {
-            selectedWebSite = sites.get(index - 1);
-            addWebSite( selectedWebSite );
+            selectedWebSite = sites.get( index );
+
+            favorites.addWebSite( selectedWebSite );
             System.out.println( "Added site to favorites: " + selectedWebSite.toOneLineString() );
         }
     }
@@ -190,6 +183,12 @@ public class FavoritesBar {
         ArrayList<WebSite> sites;
         WebSite selectedWebSite;
         int index;
+
+        // return if favorites not initialized
+        if (favorites == null) {
+            System.out.println("No favorites bar has been created to remove from.");
+            return;
+        }
         
         // get all websites
         sites = favorites.getSites();
@@ -198,36 +197,15 @@ public class FavoritesBar {
         printMenuList( sites );
         
         // get selected index
-        index = getIntInputLoop( sites.size() );
+        index = getIntInputLoop( sites.size() + 1 ) - 1;
 
 
         if ( index < sites.size() ) {
-            selectedWebSite = sites.get(index - 1);
+            selectedWebSite = sites.get( index );
 
-            removeWebSite( selectedWebSite );
+            favorites.removeWebSite( selectedWebSite );
             System.out.println( "Removed site from favorites: " + selectedWebSite.toOneLineString() );
         }
-    }
-    
-    /**
-     * main driver method
-     * 
-     * @param args
-     */
-    public static void main(String[] args) {
-        FavoritesBar bar = new FavoritesBar();
-
-        System.out.println("-----------------------------");
-        System.out.println("    Welcome to FavGen 1.0");
-        System.out.println("-----------------------------");
-
-        // bar.mainLoop();
-        bar.createFavoritesBar();
-        bar.addWebSiteLoop();
-
-        System.out.println("-----------------------------");
-        System.out.println("    Thanks for using FavGen");
-        System.out.println("-----------------------------");
     }
 
     /**
@@ -235,7 +213,7 @@ public class FavoritesBar {
      * 
      * @return WebSiteCollection of the websites in visitedsites.txt
      */
-    private static WebSiteCollection getAvailableSites() {
+    private WebSiteCollection getAvailableSites() {
         Scanner inputFile = null;
         String name, url, rating, topic, visited;
         WebSiteCollection sites = new WebSiteCollection();
@@ -244,7 +222,7 @@ public class FavoritesBar {
             // try to open file
             inputFile = new Scanner( new FileInputStream("FavoritesBar/visitedsites.txt") );
             
-            System.out.println("Initializing website list...");
+            System.out.println("Initializing website list...\n");
 
             // read websites from file
             while ( inputFile.hasNextLine() ) {
@@ -284,32 +262,34 @@ public class FavoritesBar {
      * @param title Title to display (first line)
      * @param items ArrayList of String option values
      */
-    private static void printMenuList(String title, ArrayList<String> items) {
+    private void printMenuList(String title, ArrayList<String> items) {
         // print title
         System.out.println(title);
 
         // print items
-        for ( int i = 0; i < items.size(); i++ )
-            System.out.printf("  %d) %s%n", i+1, items.get(i));
+        int i = 1;
+        for ( String item : items )
+            System.out.printf("  %d) %s%n", i++, item);
 
         // print return to main menu item
-        System.out.printf("  %d) Return to main menu%n", items.size());
+        System.out.printf( "  %d) Return to main menu%n", i );
     }
 
-    private static void printMenuList(ArrayList<WebSite> sites) {
+    private void printMenuList(ArrayList<WebSite> sites) {
         // print title
         System.out.println("Choose a website:");
 
         // print items
-        for ( int i = 0; i < sites.size(); i++ ) {
-            System.out.printf("Website #%d %n", i);
-            System.out.println("--------------");
-            System.out.println(sites.get(i).toString());
-            System.out.println("--------------\n");
+        int i = 1;
+        for ( WebSite site : sites ) {
+            System.out.printf("Website #%d %n", i++);
+            System.out.println("---------------------------------");
+            System.out.println(site.toString());
+            System.out.println("---------------------------------\n");
         }
 
         // print return to main menu item
-        System.out.printf("Option #%d: Return to main menu%n", sites.size());
+        System.out.printf( "Option #%d: Return to main menu%n", i );
     }
 
     /**
@@ -319,16 +299,20 @@ public class FavoritesBar {
      * @param maxIndex maximum index that is valid
      * @return  selected index
      */
-    private static int getIntInputLoop(int maxIndex) {
-        Scanner kbd = new Scanner(System.in);
+    private int getIntInputLoop(int maxIndex) {
+        String input;
         int selection;
         
         while ( true ) {
+            // reset input
+            input = "";
+
             // prompt for input
-            System.out.print("\n  >> ");
+            System.out.print("\n  > ");
 
             try {
-                selection = kbd.nextInt();
+                input = kbd.nextLine();
+                selection = Integer.parseInt(input);
 
                 // selection out of range
                 if ( selection < 1 || selection > maxIndex )
@@ -343,17 +327,73 @@ public class FavoritesBar {
             // a) no numbers in input stream
             // b) input stream in exhausted
             // c) selection out of range
-            catch ( NoSuchElementException e ) {
-                System.out.println("Invalid selection.");
+            catch ( NoSuchElementException | NumberFormatException e ) {
+                System.out.println("Invalid selection: " + input);
             }
-
-            // clear the input buffer
-            if ( kbd.hasNextLine() )
-                kbd.nextLine();
         }
 
-        kbd.close();
-
         return selection;
+    }
+
+    /**
+     * asks if user wants to output a favorites html file
+     */
+    private void doOutputFile() {
+        String response;
+        PrintWriter htmlOutput = null;
+        
+        System.out.println("Do you want to output your favorites as an HTML file?");
+        System.out.print("([Y]es/[N]o) > ");
+
+        response = kbd.next().toUpperCase();
+
+        if ( response.equals("Y") || response.equals("YES") ) {
+            try {
+                htmlOutput = new PrintWriter( new FileOutputStream("favorites.html") );
+
+                htmlOutput.println("<!DOCTYPE html>");
+                htmlOutput.println("<html>");
+                htmlOutput.println("    <head>");
+                htmlOutput.println("        <title>My Favorites</title>");
+                htmlOutput.println("    </head>");
+                htmlOutput.println("    <body>");
+
+                for ( WebSite site : favorites.getSites() )
+                    htmlOutput.printf("        <a href=\"%s\">%s</a>%n", site.getUrl(), site.getName());
+                
+                htmlOutput.println("    </body>");
+                htmlOutput.println("</html>");
+
+                htmlOutput.close();
+
+                System.out.println("favorites.html generated");
+            }
+
+            catch (FileNotFoundException ex) {
+                System.out.println("Failed to create favorites.html. Sorry!");
+            }
+        }
+    }
+    
+    /**
+     * main driver method
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        FavoritesBar bar;
+
+        System.out.println("-----------------------------");
+        System.out.println("    Welcome to FavGen 1.0");
+        System.out.println("-----------------------------");
+        System.out.println("\n");
+
+        bar = new FavoritesBar();
+        bar.mainLoop();
+
+        System.out.println("\n");
+        System.out.println("-----------------------------");
+        System.out.println("    Thanks for using FavGen");
+        System.out.println("-----------------------------");
     }
 }

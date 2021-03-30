@@ -184,11 +184,11 @@ public class WebSite {
     public String toString() {
         String stringRepr = new String();
 
-        stringRepr += "Name:\t\t" + getName() + "\n";
-        stringRepr += "Address:\t\t" + getUrl() + "\n";
-        stringRepr += "Topic:\t\t" + getTopic() + "\n";
-        stringRepr += "Rating:\t\t" + getRating() + "\n";
-        stringRepr += "Last Visited:\t\t" + getDate();
+        stringRepr += "Name:            " + getName() + "\n";
+        stringRepr += "Address:         " + getUrl() + "\n";
+        stringRepr += "Topic:           " + getTopic() + "\n";
+        stringRepr += "Rating:          " + getRating() + "\n";
+        stringRepr += "Last Visited:    " + getDate();
         
         return stringRepr;
     }
