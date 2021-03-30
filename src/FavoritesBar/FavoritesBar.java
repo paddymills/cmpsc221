@@ -149,7 +149,7 @@ public class FavoritesBar {
 
         // return if favorites not initialized
         if (favorites == null) {
-            System.out.println("No favorites bar has been created to remove from.");
+            System.out.println("No favorites bar has been created to add to.");
             return;
         }
 
