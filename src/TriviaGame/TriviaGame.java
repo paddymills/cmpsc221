@@ -30,7 +30,7 @@ public class TriviaGame {
     private static final String QUESTIONS_FILE = "TriviaGame/questions.txt";
     
     private ArrayList<Question> questions;
-    private int pointsEarned;
+    private int pointsEarned, totalPointsAvailable;
     private Question currentQuestion;
 
     private TriviaGameGui gui;
@@ -40,6 +40,7 @@ public class TriviaGame {
      */
     public TriviaGame() {
         pointsEarned = 0;
+        totalPointsAvailable = 0;
         questions = new ArrayList<Question>();
         gui = new TriviaGameGui( this );
 
@@ -65,6 +66,8 @@ public class TriviaGame {
                 _points = Integer.parseInt( inputFile.nextLine() );
 
                 questions.add( new Question( _question, _answer, _points ) );
+
+                totalPointsAvailable += _points;
             }
 
             inputFile.close();
@@ -140,7 +143,7 @@ public class TriviaGame {
         String message = new String();
 
         title = "Goodbye";
-        message = "Thanks for playing. You earned " + pointsEarned + " points.";
+        message = "Thanks for playing. You earned " + pointsEarned + "/" + totalPointsAvailable + " points.";
 
         JOptionPane.showMessageDialog(gui, message, title, JOptionPane.PLAIN_MESSAGE);
         gui.dispose();

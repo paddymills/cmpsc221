@@ -30,7 +30,7 @@ public class Question {
      */
     public Question(String q, String a, int p) {
         question = q;
-        answer = a.toLowerCase();
+        answer = a;
         points = p;
     }
 
@@ -47,7 +47,7 @@ public class Question {
      * @param a answer string
      */
     public void setAnswer(String a) {
-        answer = a.toLowerCase();
+        answer = a;
     }
 
     /**
@@ -91,9 +91,9 @@ public class Question {
     public boolean checkAnswer(String userAnswer) {
         // strip leading/trailing whitespace
         // and convert to lower case
-        String cleanedUserAnswer = userAnswer.strip().toLowerCase();
+        String cleanedUserAnswer = userAnswer.strip();
 
-        if ( answer.equals(cleanedUserAnswer) )
+        if ( answer.toLowerCase().equals(cleanedUserAnswer.toLowerCase()) )
             return true;
 
         return false;
