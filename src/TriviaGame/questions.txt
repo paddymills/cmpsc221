@@ -1,0 +1,33 @@
+Who created the Python programming language?
+Guido van Rossum
+40
+This denial of service attach works by trying to keep as many connections to a web server open for as long as possible.
+Slowloris
+100
+Created at Bell Labs, this type of operating system is the basis for many modern operating systems such as Linux.
+UNIX
+25
+This popular command line utility allows for searching of text using regular expressions.
+grep
+10
+What operating system is the firewall/router software pfSense build on top of?
+FreeBSD
+20
+What company Employed Dennis Ritchie when he created the C programming language?
+Bell Labs
+50
+Of what nationality is Linus Torvalds, the creator of Linux?
+Finnish
+35
+Under the Linux operating system, what process usually has PID(process ID) 1?
+init
+75
+This hardware vulnerability allowed a process access to memory it should not have been authorized to access.
+Meltdown
+60
+This famous mathematician is known for the method of currying, in which a function with more than one argument is transformed into multiple dependent functions that each take 1 argument.
+Haskell Curry
+125
+This POSIX-compliant shell is the default for most linux distributions.
+Bash
+30

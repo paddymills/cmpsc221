@@ -1,7 +1,20 @@
 package TriviaGame;
 
 /**
- * Question
+    Author:             Patrick Miller
+    E-mail:             pjm6196@psu.edu
+    Course:             CMPSC 221
+    Assignment:         Project 4
+    Due date:           4/14/2021
+    File:               Question.java
+    Purpose:            Question object class
+    Compiler/IDE:       openjdk-15/VisualStudioCode
+    Operating system:   Linux pop-os 5.8.0
+    Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+*/
+
+/**
+ * Question instance class
  */
 public class Question {
 
@@ -69,8 +82,16 @@ public class Question {
         return points;
     }
 
+    /**
+     * checks whether user's answer is correct
+     * 
+     * @param userAnswer user's answer as String
+     * @return if user's answer is a case insensitive, whitespace ignored equivalent to the answer
+     */
     public boolean checkAnswer(String userAnswer) {
-        String cleanedUserAnswer = userAnswer.strip();
+        // strip leading/trailing whitespace
+        // and convert to lower case
+        String cleanedUserAnswer = userAnswer.strip().toLowerCase();
 
         if ( answer.equals(cleanedUserAnswer) )
             return true;
