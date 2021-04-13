@@ -44,8 +44,6 @@ public class TriviaGame {
         gui = new TriviaGameGui( this );
 
         getQuestions();
-
-        gui.displayQuestionPrompt( getNextQuestion() );
     }
 
     /**
@@ -81,6 +79,13 @@ public class TriviaGame {
             System.out.println("Error while parsing questions.txt");
             System.exit(1);
         }
+    }
+
+    /**
+     * entrypoint to play game
+     */
+    public void playGame() {
+        gui.displayQuestionPrompt( getNextQuestion() );
     }
 
     /**
@@ -147,6 +152,8 @@ public class TriviaGame {
      */
     public static void main(String[] args) {
         TriviaGame game = new TriviaGame();
+
+        game.playGame();
     }
     
 }

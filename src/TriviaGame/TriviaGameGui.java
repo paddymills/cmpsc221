@@ -8,13 +8,19 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * GUI implimentation for TriviaGama
+ * 
+ * inherits JFrame
+ * is its own ActionListner
+ */
 public class TriviaGameGui extends JFrame implements ActionListener {
     
     private static final int WIDTH = 600;
@@ -43,7 +49,7 @@ public class TriviaGameGui extends JFrame implements ActionListener {
         setSize( WIDTH, HEIGHT );
         setLocationRelativeTo( null );  // center on screen
         setLayout( new BorderLayout() );
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         
         // initialize panels
         buttonPanel = new JPanel();
@@ -102,6 +108,8 @@ public class TriviaGameGui extends JFrame implements ActionListener {
     
     /**
      * handle JButtons
+     * 
+     * @param e the event captured
      */
     public void actionPerformed(ActionEvent e) {
 
