@@ -16,12 +16,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * GUI implimentation for TriviaGama
+ * GUI implimentation for TriviaGame
  * 
  * inherits JFrame
  * is its own ActionListner
  */
 public class TriviaGameGui extends JFrame implements ActionListener {
+
+    // to shut up VSCode, and maybe its good practice
+    //  https://stackoverflow.com/questions/285793/what-is-a-serialversionuid-and-why-should-i-use-it
+    private static final long serialVersionUID = 1L;
     
     private static final int WIDTH = 600;
     private static final int HEIGHT = 300;
