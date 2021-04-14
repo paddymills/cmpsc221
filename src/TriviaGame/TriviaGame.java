@@ -115,7 +115,7 @@ public class TriviaGame {
         if ( currentQuestion.checkAnswer(userAnswer) ) {
             pointsEarned += currentQuestion.getPoints();
             title = "Correct";
-            message = "Correct. You earned " + pointsEarned + " points";
+            message = "Correct. You earned " + currentQuestion.getPoints() + " points";
             
             gui.updatePointsEarned( pointsEarned );
         } else {

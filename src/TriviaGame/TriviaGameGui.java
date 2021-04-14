@@ -1,5 +1,18 @@
 package TriviaGame;
 
+/**
+    Author:             Patrick Miller
+    E-mail:             pjm6196@psu.edu
+    Course:             CMPSC 221
+    Assignment:         Project 4
+    Due date:           4/14/2021
+    File:               TriviaGame.java
+    Purpose:            Trivia game driver
+    Compiler/IDE:       openjdk-15/VisualStudioCode
+    Operating system:   Linux pop-os 5.8.0
+    Reference(s):       OpenJDK 15 (devdocs.io) (https://devdocs.io/openjdk~15/);
+*/
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
