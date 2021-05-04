@@ -7,7 +7,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev    \
     vim                 \
-    git
+    git                 \
+    sqlite3
 
 RUN useradd -ms /bin/bash vscode
 RUN git config --global user.name paddymills

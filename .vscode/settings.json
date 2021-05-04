@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "music",
+            "database": "/home/patrick/Documents/CMPSC-211/code/src/MusicDb/music.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

@@ -1,0 +1,7 @@
+since this relies on the sqlite JAR file, you will need to run it as this:
+
+    java -classpath ".:sqlite-jdbc-3.34.0.jar" MusicDb
+
+or maybe, due to packaging, run like this:
+
+    java -classpath ".:MusicDb/sqlite-jdbc-3.34.0.jar" MusicDb.MusicDb

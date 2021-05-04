@@ -23,7 +23,9 @@
 		"nhoizey.gremlins",
 		"mhutchie.git-graph",
 		"tomoki1207.pdf",
-		"tabnine.tabnine-vscode"
+		"tabnine.tabnine-vscode",
+		"mtxr.sqltools-driver-sqlite",
+		"mtxr.sqltools"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

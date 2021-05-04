@@ -1,0 +1,50 @@
+ Database Table: musicTitles
+-----------------------------
+ID   Genre                         Artist                        Title                         Album                                             Release Date
+================================================================================================================================================================
+4    Death Metal                   Arch Enemy                    As the Pages Burn             War Eternal                                       2014
+9    Trance                        Arty & Mat Zo                 Rebound                       AnjunaBeats Presents Mat Zo 01                    2011
+5    Dance Pop                     Bag Raiders                   Shooting Stars                Bag Raiders                                       2009
+7    Alternative Rock              Blue October                  Into the Ocean                Foled                                             2006
+10   Alternative Rock              Coldplay                      Speed of Sound                X&Y                                               2005
+6    Pop                           Eric Clapton                  Change the World              Phenomenon                                        1996
+3    Alternative Rock              Gorillaz                      Clint Eastwood                Gorillaz                                          2001
+2    Pop                           Halsey                        Without Me                    Manic                                             2018
+1    Rock                          Pink Floyd                    Learning to Fly               A Momentary Lapse of Reason                       1987
+8    Rock                          U2                            City of Blinding Lights       How to Dismantle an Atomic Bomb                   2004
+
+
+
+ Database Table: musicAwards
+-----------------------------
+ID   Award                                             Award Year
+======================================================================
+2    American Music Award: Favorite Pop/Rock Song      2019
+8    Grammy: Best Rock Song                            2006
+10   Brit Award: Song of the Year                      2006
+3    MTV Europe Music Award: Best Song                 2001
+6    Grammy: Song of the Year                          1997
+1    MTV Videa Music Award: Best Concept Video         1988
+
+
+
+ Songs that have received awards
+---------------------------------
+Genre                         Artist                        Award                                             Award Year
+==================================================================================================================================
+Rock                          Pink Floyd                    MTV Videa Music Award: Best Concept Video         1988
+Pop                           Halsey                        American Music Award: Favorite Pop/Rock Song      2019
+Alternative Rock              Gorillaz                      MTV Europe Music Award: Best Song                 2001
+Pop                           Eric Clapton                  Grammy: Song of the Year                          1997
+Rock                          U2                            Grammy: Best Rock Song                            2006
+Alternative Rock              Coldplay                      Brit Award: Song of the Year                      2006
+
+
+
+ Songs from the `Rock` Genre
+-----------------------------
+ID   Genre                         Artist                        Title                         Album                                             Release Date
+================================================================================================================================================================
+1    Rock                          Pink Floyd                    Learning to Fly               A Momentary Lapse of Reason                       1987
+8    Rock                          U2                            City of Blinding Lights       How to Dismantle an Atomic Bomb                   2004
+
